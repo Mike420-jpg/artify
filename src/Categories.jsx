@@ -1,7 +1,7 @@
 // src/Categories.js
 import React, { useState } from "react";
 import "./Categories.css";
-import "./navbar.jsx";
+import "./Navbar.jsx";
 import "./navbar.css";
 import Footer from "./Footer.jsx";
 
