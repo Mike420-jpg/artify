@@ -1,14 +1,15 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./navbar";
-import Carousel from "./carousel";
+
+import Navbar from "./Navbar";
+import Carousel from "./Carousel";
 import Options from "./Options";
 import CardSlider1 from "./CardSlider1";
 import CardSlider2 from "./CardSlider2";
 import Categories from "./Categories";
 import ArtifyWorks from "./ArtifyWorks";
-import Footer from "./Footer.js";
-import AboutUs from "./AboutUs.js";
+import Footer from "./Footer";
+import AboutUs from "./AboutUs";
 
 function Home() {
   return (

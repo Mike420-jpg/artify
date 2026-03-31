@@ -10,7 +10,7 @@ import member3 from './Images/carlo_marrero.jpg';
 import member4 from './Images/michael_narvarte.png';
 import member5 from './Images/mariane_reyes.jfif';
 import member6 from './Images/lance_tanala.jfif';
-import Footer from './Footer.js';
+import Footer from './Footer.jsx';
 
 const AboutUs = () => {
     return (

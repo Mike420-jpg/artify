@@ -1,9 +1,9 @@
 // src/Categories.js
 import React, { useState } from "react";
 import "./Categories.css";
-import "./navbar.js";
+import "./navbar.jsx";
 import "./navbar.css";
-import Footer from "./Footer.js";
+import Footer from "./Footer.jsx";
 
 function Categories() {
   // State for selected subcategory
