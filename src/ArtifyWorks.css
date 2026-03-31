@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Gloock&display=swap');
+
+.gloock-regular {
+  font-family: "Gloock", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Gloock&family=Jacques+Francois&display=swap');
+
+.jacques-francois-regular {
+  font-family: "Jacques Francois", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Gloock&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Jacques+Francois&display=swap');
+
+.instrument-sans {
+  font-family: "Instrument Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.artifyWorksContainer {
+    background-color: #FCF5E5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-bottom: 40px;
+}
+
+.container1 {
+    padding-top: 30px;
+    width: 75%;
+}
+
+.ArtifyWorks {
+    width: 300px;
+    height: 300px;
+}
+
+.Subtitle {
+    font-family: "Jacques Francois", serif;
+    font-size: 20px;
+}
+
+.Captions {
+    font-family: "Instrument Sans", serif;
+    font-size: 16px;
+}

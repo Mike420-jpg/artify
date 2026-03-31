@@ -1,0 +1,285 @@
+@import url('https://fonts.googleapis.com/css2?family=Gloock&display=swap');
+
+.gloock-regular {
+  font-family: "Gloock", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Gloock&family=Jacques+Francois&display=swap');
+
+.jacques-francois-regular {
+  font-family: "Jacques Francois", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Gloock&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Jacques+Francois&display=swap');
+
+.instrument-sans {
+  font-family: "Instrument Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.aboutUs {
+    width: 100%;
+    margin-top: 0;
+    padding: 0;
+}
+
+/* Hero Section with Background Image */
+.aboutHeroSection {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    height: 500px;
+    overflow: hidden;
+}
+
+.aboutHeroImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.aboutContentOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.aboutHeroTitle {
+    font-family: "Jacques Francois", serif;
+    font-size: 56px;
+    color: white;
+    letter-spacing: 3px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: 400;
+}
+
+.aboutTextBox {
+    background: rgba(100, 100, 100, 0.7);
+    padding: 40px;
+    border-radius: 8px;
+    max-width: 700px;
+    width: 100%;
+    backdrop-filter: blur(5px);
+}
+
+.aboutDescriptionText {
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 16px;
+    color: white;
+    line-height: 1.8;
+    text-align: center;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+/* Logo and Intro Section */
+.aboutLogoSection {
+    background-color: #FDF7EB;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.aboutLogoImage {
+    width: 120px;
+    height: auto;
+    margin-bottom: 30px;
+}
+
+.aboutIntro {
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 16px;
+    color: #333;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+.missionVisionContainer {
+    background-color: #FCF5E5;
+    padding: 60px 20px;
+    text-align: center;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+}
+
+.missionVisionTitle {
+    font-family: "Jacques Francois", serif;
+    font-size: 32px;
+    color: #AC7705;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.decorativeGold {
+    width: 60px;
+    height: 3px;
+    background-color: #AC7705;
+    margin: 15px auto 25px;
+}
+
+.misionVisionText {
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 15px;
+    color: #333;
+    line-height: 1.8;
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.missionVisionText {
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 15px;
+    color: #333;
+    line-height: 1.8;
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.col-lg-6 .DecorativeLine {
+    width: 350px;
+    height: 60px;
+    transform: rotate(180deg);
+    margin-bottom: 15px;
+}
+
+.col-lg-6 .text-center {
+    display: flex;
+    justify-content: center;
+    margin-bottom: -10px;
+}
+
+/* About Us Top Section */
+.aboutUsTop {
+    margin-bottom: 50px;
+    padding-bottom: 40px;
+    position: relative;
+}
+
+.aboutUsTop::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 2px;
+    background-color: #AC7705;
+}
+
+.aboutUsTitle {
+    font-family: "Jacques Francois", serif;
+    font-size: 32px;
+    color: #AC7705;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.aboutUsSubtitle {
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Team Section */
+.teamSection {
+    background-color: #FDF7EB;
+    padding: 60px 20px;
+    text-align: center;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+}
+
+.teamTitle {
+    font-family: "Jacques Francois", serif;
+    font-size: 28px;
+    color: #AC7705;
+    margin-bottom: 50px;
+    letter-spacing: 2px;
+}
+
+.teamMemberCol {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.teamMemberPhoto {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #AC7705;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+    margin-bottom: 15px;
+}
+
+.teamMemberPhoto:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.teamMemberName {
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+    margin: 0;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .aboutHeroSection {
+        height: 400px;
+    }
+
+    .aboutHeroTitle {
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+
+    .aboutTextBox {
+        padding: 30px;
+    }
+
+    .aboutDescriptionText {
+        font-size: 14px;
+    }
+
+    .missionVisionTitle {
+        font-size: 20px;
+    }
+
+    .teamTitle {
+        font-size: 24px;
+        margin-bottom: 30px;
+    }
+
+    .teamMemberPhoto {
+        width: 120px;
+        height: 120px;
+    }
+}

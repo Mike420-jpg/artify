@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Gloock&display=swap');
+
+.gloock-regular {
+  font-family: "Gloock", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Gloock&family=Jacques+Francois&display=swap');
+
+.jacques-francois-regular {
+  font-family: "Jacques Francois", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Gloock&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Jacques+Francois&display=swap');
+
+.instrument-sans {
+  font-family: "Instrument Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.Categories button {
+    margin-top: 50px;
+    border:3px solid #A17F1A;
+    background: white;
+    color: black;
+    width: 10%;
+    font-family: "Instrument Sans", sans-serif;
+    font-weight: 600;
+    min-width: 120px;
+}
+
+.Categories .btn:hover {
+    background-color: #D3D3D3;
+    border:3px solid #A17F1A;
+    color: black;
+}
+
+.Categories {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .Categories {
+        gap: 10px;
+    }
+
+    .Categories .btn {
+        width: 45%;
+    }
+}
