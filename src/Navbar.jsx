@@ -4,7 +4,6 @@ import "./navbar.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import logo from './Images/Artify_Logo.png';
-import image from './Images/user.png';
 
 const Navbar = () => {
     return (
@@ -34,7 +33,7 @@ const Navbar = () => {
                         </li>
 
                         <li className="nav-item">
-                            <img src= {image} alt = "user_icon" id = "user_icon" />
+                            <Link className="nav-link" to="/LoginRegister">Login/Signup</Link>
                         </li>
 
                     </ul>
