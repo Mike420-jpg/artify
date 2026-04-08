@@ -1,76 +1,97 @@
-import React, { useState } from 'react';
-import './FormCard.css';
-import logo from './Images/Artify_Logo.png';
+import { useState } from "react";
+import "./FormCard.css";
+import logo from "./Images/Artify_Logo.png";
+
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { auth, db } from "./firebase";
 
 function RegisterForm({ onSwitchToLogin }) {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    return emailRegex.test(email)
-  }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setError('')
-    setSuccess('')
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setSuccess("");
 
     if (!validateEmail(email)) {
-      setError('Please enter a valid email address')
-      setTimeout(() => setError(''), 4000)
-      return
+      setError("Please enter a valid email address");
+      setTimeout(() => setError(""), 4000);
+      return;
     }
 
     if (password.length < 6) {
-      setError('Password must be at least 6 characters long')
-      setTimeout(() => setError(''), 4000)
-      return
+      setError("Password must be at least 6 characters long");
+      setTimeout(() => setError(""), 4000);
+      return;
     }
 
     if (password !== confirmPassword) {
-      setError('Passwords do not match')
-      setTimeout(() => setError(''), 4000)
-      return
+      setError("Passwords do not match");
+      setTimeout(() => setError(""), 4000);
+      return;
     }
 
-    // Get users from localStorage
-    const users = JSON.parse(localStorage.getItem('users')) || []
+    try {
 
-    if (users.some((user) => user.email === email)) {
-      setError('Email already registered')
-      setTimeout(() => setError(''), 4000)
-      return
+
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      const user = userCredential.user;
+
+
+      await setDoc(doc(db, "users", user.uid), {
+        email: email,
+        createdAt: new Date()
+      });
+
+      setSuccess("Account created successfully! Redirecting to login...");
+
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
+
+      setTimeout(() => {
+        if (onSwitchToLogin) {
+          onSwitchToLogin();
+        }
+      }, 2000);
+
+    } catch (err) {
+
+      if (err.code === "auth/email-already-in-use") {
+        setError("Email already registered");
+      } else if (err.code === "auth/invalid-email") {
+        setError("Invalid email format");
+      } else {
+        setError(err.message);
+      }
+
+      setTimeout(() => setError(""), 4000);
     }
-
-    // Add new user
-    users.push({
-      id: Date.now(),
-      email: email,
-      password: password,
-      createdAt: new Date().toISOString(),
-    })
-
-    localStorage.setItem('users', JSON.stringify(users))
-
-    setSuccess('Account created successfully! Redirecting to login...')
-    setEmail('')
-    setPassword('')
-    setConfirmPassword('')
-
-    setTimeout(() => {
-      onSwitchToLogin()
-    }, 2000)
-  }
+  };
 
   return (
     <div className="form-card">
+
       <div className="card-logo">
         <img src={logo} alt="Artify" className="logo-img" />
       </div>
+
       <h1 className="form-title">CREATE YOUR ACCOUNT</h1>
       <p className="form-subtitle">Please confirm your details</p>
 
@@ -78,6 +99,7 @@ function RegisterForm({ onSwitchToLogin }) {
       {success && <div className="success-message">{success}</div>}
 
       <form className="register-form" onSubmit={handleSubmit}>
+
         <div className="form-group">
           <input
             type="email"
@@ -114,19 +136,26 @@ function RegisterForm({ onSwitchToLogin }) {
         <button type="submit" className="register-btn">
           Register
         </button>
+
       </form>
 
       <div className="login-link">
-        Already have an account?{' '}
-        <a href="#" onClick={(e) => {
-          e.preventDefault()
-          onSwitchToLogin()
-        }}>
+        Already have an account?{" "}
+        <a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            if (onSwitchToLogin) {
+              onSwitchToLogin();
+            }
+          }}
+        >
           Login here
         </a>
       </div>
+
     </div>
-  )
+  );
 }
 
-export default RegisterForm
+export default RegisterForm;
