@@ -1,0 +1,250 @@
+.artwork-detail-page {
+  min-height: 100vh;
+  background-color: #f5f0e8;
+  position: relative;
+}
+
+.artwork-detail-content {
+  display: flex;
+  min-height: calc(100vh - 80px);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.artwork-image-section {
+  flex: 1;
+  background-color: #222221;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.artwork-image-section img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.artwork-info-section {
+  flex: 1;
+  background-color: #fffef7;
+  padding: 60px 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.artwork-category-title {
+  font-size: 64px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 20px 0;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.artwork-subtitle {
+  font-size: 28px;
+  font-weight: 400;
+  color: #333;
+  margin: 0 0 20px 0;
+  line-height: 1.3;
+  font-style: italic;
+}
+
+.artwork-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e0dcd3;
+}
+
+.artwork-code {
+  font-size: 18px;
+  font-weight: 600;
+  color: #666;
+  letter-spacing: 1px;
+}
+
+.artwork-price-display {
+  font-size: 28px;
+  font-weight: 700;
+  color: #8b5a2b;
+}
+
+.artwork-description {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 40px;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+.add-to-cart-button {
+  width: 100%;
+  background-color: #1a1a1a;
+  color: white;
+  border: none;
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+}
+
+.add-to-cart-button:hover {
+  background-color: #8b5a2b;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.add-to-cart-button:active {
+  transform: translateY(0);
+}
+
+.contact-info {
+  border-top: 2px solid #1a1a1a;
+  padding-top: 30px;
+  margin-top: auto;
+  margin-bottom: 30px;
+}
+
+.contact-info h3 {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #1a1a1a;
+  margin: 0 0 20px 0;
+}
+
+.contact-info p {
+  font-size: 14px;
+  color: #555;
+  margin: 8px 0;
+  line-height: 1.6;
+}
+
+.contact-info strong {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.back-button {
+  background: none;
+  border: 2px solid #1a1a1a;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #1a1a1a;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  text-transform: uppercase;
+}
+
+.back-button:hover {
+  background-color: #1a1a1a;
+  color: #fffef7;
+}
+
+.artwork-loading {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f0e8;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid #ddd;
+  border-top: 3px solid #1a1a1a;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 968px) {
+  .artwork-detail-content {
+    flex-direction: column;
+  }
+
+  .artwork-image-section {
+    min-height: 50vh;
+    padding: 20px;
+  }
+
+  .artwork-image-section img {
+    max-height: 50vh;
+  }
+
+  .artwork-info-section {
+    padding: 40px 30px;
+  }
+
+  .artwork-category-title {
+    font-size: 48px;
+  }
+
+  .artwork-subtitle {
+    font-size: 22px;
+  }
+
+  .artwork-description {
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+
+  .artwork-price-display {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .artwork-info-section {
+    padding: 30px 20px;
+  }
+
+  .artwork-category-title {
+    font-size: 36px;
+  }
+
+  .artwork-subtitle {
+    font-size: 18px;
+  }
+
+  .artwork-description {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .artwork-meta {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .contact-info h3 {
+    font-size: 14px;
+  }
+
+  .contact-info p {
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,372 @@
+/* src/Categories.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue",
+    sans-serif;
+  background-color: #fffbf1;
+  color: #1a1a1a;
+}
+
+.artify-container {
+  min-height: 100vh;
+  background-color: #fffbf1;
+}
+
+/* Main Layout - Two Columns */
+.main-layout {
+  display: flex;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 40px;
+  gap: 60px;
+  flex-direction: row; /* This ensures sidebar is on left */
+}
+
+/* Left Side - Featured Items Section */
+.featured-section {
+  flex: 3;
+  background-color: #fffbf1;
+}
+
+.artify-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 40px;
+  letter-spacing: -0.5px;
+}
+
+.category-header {
+  margin-bottom: 40px;
+  border-bottom: 1px solid #e0d5c0;
+  padding-bottom: 20px;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+}
+
+.item-count-display {
+  color: #8b7a66;
+  font-size: 0.9rem;
+}
+
+/* Featured Items Grid */
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.featured-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid #e8e0d0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.featured-card:hover {
+  transform: translateY(-5px);
+  border-color: #d4c8b0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.featured-image {
+  position: relative;
+  height: 260px;
+  overflow: hidden;
+  background-color: #f5efe3;
+}
+
+.featured-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.featured-card:hover .featured-image img {
+  transform: scale(1.05);
+}
+
+.price-tag {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #1a1a1a;
+  color: #fffbf1;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.featured-details {
+  padding: 20px;
+}
+
+.featured-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.artist-info {
+  color: #8b7a66;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+}
+
+.artwork-info {
+  color: #b8a88c;
+  font-size: 0.8rem;
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+
+.year-info {
+  color: #b8a88c;
+  font-size: 0.75rem;
+  margin-bottom: 10px;
+}
+
+.view-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #1a1a1a;
+  color: #fffbf1;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.view-button:hover {
+  background-color: #333333;
+  transform: translateY(-2px);
+}
+
+/* Right Side - Categories Sidebar */
+.sidebar {
+  flex: 1;
+  background-color: #fffbf1;
+  position: sticky;
+  top: 40px;
+  height: fit-content;
+  border-right: 1px solid #e0d5c0; /* Changed from border-left to border-right */
+  padding-right: 30px; /* Changed from padding-left to padding-right */
+  padding-left: 0;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e0d5c0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.collapse-icon {
+  cursor: pointer;
+  color: #8b7a66;
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
+}
+
+/* Category Groups */
+.category-group {
+  margin-bottom: 25px;
+}
+
+.category-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  cursor: pointer;
+  color: #1a1a1a;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.category-title:hover {
+  color: #8b7a66;
+}
+
+.category-arrow {
+  color: #b8a88c;
+  transition: transform 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.category-arrow.collapsed {
+  transform: rotate(180deg);
+}
+
+.category-group ul {
+  list-style: none;
+  padding-left: 15px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.category-group li {
+  padding: 8px 0 8px 10px;
+  color: #8b7a66;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  border-left: 2px solid transparent;
+}
+
+.category-group li:hover {
+  color: #1a1a1a;
+  padding-left: 15px;
+  border-left-color: #d4c8b0;
+}
+
+.category-group li.active-subcategory {
+  color: #1a1a1a;
+  border-left-color: #1a1a1a;
+  padding-left: 15px;
+  background-color: #f9f4e8;
+  font-weight: 500;
+}
+
+.active-category {
+  color: #1a1a1a !important;
+  font-weight: 600;
+}
+
+.no-subcategories {
+  color: #d4c8b0;
+  font-style: italic;
+  cursor: default;
+}
+
+.no-subcategories:hover {
+  color: #d4c8b0;
+  padding-left: 10px;
+  border-left-color: transparent;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .main-layout {
+    flex-direction: column; /* Stack vertically on mobile */
+    padding: 20px;
+    gap: 40px;
+  }
+
+  .sidebar {
+    position: relative;
+    top: 0;
+    border-right: none;
+    border-bottom: 1px solid #e0d5c0;
+    padding-right: 0;
+    padding-bottom: 20px;
+  }
+
+  .category-group ul {
+    padding-left: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .artify-title {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .featured-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .main-layout {
+    padding: 15px;
+    gap: 30px;
+  }
+
+  .featured-image {
+    height: 220px;
+  }
+}
+
+@media (max-width: 480px) {
+  .featured-title {
+    font-size: 0.9rem;
+  }
+
+  .price-tag {
+    font-size: 0.8rem;
+    padding: 4px 10px;
+  }
+
+  .sidebar-header {
+    font-size: 1rem;
+  }
+
+  .category-title {
+    font-size: 0.9rem;
+  }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5efe3;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4c8b0;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b8a88c;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.featured-card {
+  animation: fadeInUp 0.4s ease-out forwards;
+}
