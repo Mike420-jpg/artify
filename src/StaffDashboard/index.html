@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>Staff Dashboard</h1>
+            <span class="sales-badge">SALES</span>
+        </header>
+
+        <!-- Welcome and Sales Row -->
+        <div class="welcome-sales-row">
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <div class="welcome-content">
+                    <p class="welcome-text">Welcome back,</p>
+                    <h2>Sabrina Carpenter</h2>
+                    <p class="role">Gallery Manager</p>
+                </div>
+            </section>
+
+            <!-- Sales Overview -->
+            <section class="sales-overview">
+                <div class="sales-overview-card">
+                    <h3>Sales Overview</h3>
+                    <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">1250</div>
+                    <div class="stat-label">Total Orders</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">24</div>
+                    <div class="stat-label">New Artworks</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">P250K</div>
+                    <div class="stat-label">Total Revenue</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">3,600</div>
+                    <div class="stat-label">Website Visits</div>
+                </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Artists Section -->
+        <section class="artists-section">
+            <h3>Artists</h3>
+            <table class="artists-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Genre</th>
+                        <th>Artworks Sold</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><img src="images/placeholder1.jpg" alt="Nica Beatriz Flores" class="artist-avatar"/> Nica Beatriz Flores</td>
+                        <td>Abstract</td>
+                        <td>144</td>
+                        <td><span class="status active">Active</span></td>
+                    </tr>
+                    <tr>
+                        <td><img src="images/placeholder2.jpg" alt="Aiah Marie Santos" class="artist-avatar"/> Aiah Marie Santos</td>
+                        <td>Portrait</td>
+                        <td>105</td>
+                        <td><span class="status active">Active</span></td>
+                    </tr>
+                    <tr>
+                        <td><img src="images/placeholder3.jpg" alt="Kira Elise Bautista" class="artist-avatar"/> Kira Elise Bautista</td>
+                        <td>Ceramic</td>
+                        <td>98</td>
+                        <td><span class="status active">Active</span></td>
+                    </tr>
+                    <tr>
+                        <td><img src="images/placeholder4.png" alt="Ace Benjamin Flores" class="artist-avatar"/> Ace Benjamin Flores</td>
+                        <td>Sculpture</td>
+                        <td>89</td>
+                        <td><span class="status inactive">Offline</span></td>
+                    </tr>
+                    <tr>
+                        <td><img src="images/placeholder5.png" alt="Enzo Gabriel Mendozas" class="artist-avatar"/> Enzo Gabriel Mendozas</td>
+                        <td>Digital</td>
+                        <td>76</td>
+                        <td><span class="status active">Active</span></td>
+                    </tr>
+                    <tr>
+                        <td><img src="images/placeholder6.jpg" alt="Jax Daniel Ramos" class="artist-avatar"/> Jax Daniel Ramos</td>
+                        <td>Graphic</td>
+                        <td>81</td>
+                        <td><span class="status active">Active</span></td>
+                    </tr>
+                    <tr>
+                        <td><img src="images/placeholder7.jpg" alt="Boy Abunda" class="artist-avatar"/> Boy Abunda</td>
+                        <td>Mural</td>
+                        <td>70</td>
+                        <td><span class="status inactive">Offline</span></td>
+                    </tr>
+                    <tr>
+                        <td><img src="images/placeholder8.jpg" alt="Migs Alejandro Cruz" class="artist-avatar"/> Migs Alejandro Cruz</td>
+                        <td>Sculpture</td>
+                        <td>75</td>
+                        <td><span class="status inactive">Offline</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Recent Sales -->
+        <section class="recent-sales">
+            <h3>Recent Sales</h3>
+            <div class="sales-header">
+                <div class="header-item"></div>
+                <div class="header-item">Artwork</div>
+                <div class="header-item">Buyer</div>
+                <div class="header-item">Amount</div>
+            </div>
+            <div class="sales-list">
+                <div class="sale-item">
+                    <div class="artwork-thumbnail"><img src="images/artwork1.png" alt="Girl with a Pearl Earring"/></div>
+                    <div class="sale-details">
+                        <div class="artwork-name">Girl with a Pearl Earring</div>
+                        <div class="artist-name">Johannes Vermeer</div>
+                    </div>
+                    <div class="buyer-name">Taylor Smith</div>
+                    <div class="sale-amount">₱40,000</div>
+                </div>
+                <div class="sale-item">
+                    <div class="artwork-thumbnail"><img src="images/artwork2.webp" alt="The Creation of Adam"/></div>
+                    <div class="sale-details">
+                        <div class="artwork-name">The Creation of Adam</div>
+                        <div class="artist-name">Michelangelo Buonarroti</div>
+                    </div>
+                    <div class="buyer-name">Emma Mitchell</div>
+                    <div class="sale-amount">₱56,000</div>
+                </div>
+                <div class="sale-item">
+                    <div class="artwork-thumbnail"><img src="images/artwork3.jpg" alt="The Starry Night"/></div>
+                    <div class="sale-details">
+                        <div class="artwork-name">The Starry Night</div>
+                        <div class="artist-name">Vincent van Gogh</div>
+                    </div>
+                    <div class="buyer-name">Kho Pickhardt</div>
+                    <div class="sale-amount">₱79,000</div>
+                </div>
+                <div class="sale-item">
+                    <div class="artwork-thumbnail"><img src="images/artwork4.webp" alt="Napoleon Crossing the Alps"/></div>
+                    <div class="sale-details">
+                        <div class="artwork-name">Napoleon Crossing the Alps</div>
+                        <div class="artist-name">Jacques-Louis David</div>
+                    </div>
+                    <div class="buyer-name">Lis Pickhardt</div>
+                    <div class="sale-amount">₱54,000</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
