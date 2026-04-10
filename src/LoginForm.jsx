@@ -2,10 +2,17 @@ import React, { useState } from "react";
 import "./FormCard.css";
 import logo from "./Images/Artify_Logo.png";
 
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "./firebase";
+import { 
+  signInWithEmailAndPassword,
+  setPersistence,
+  browserLocalPersistence
+} from "firebase/auth";
+
+import { doc, getDoc } from "firebase/firestore";
+import { auth, db } from "./firebase";
 
 function LoginForm({ onSwitchToRegister }) {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -29,21 +36,43 @@ function LoginForm({ onSwitchToRegister }) {
     }
 
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      await setPersistence(auth, browserLocalPersistence);
+
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      const docSnap = await getDoc(doc(db, "users", user.uid));
+
+      if (!docSnap.exists()) {
+        setError("User data not found");
+        return;
+      }
+
+      const userData = docSnap.data();
+
+      localStorage.setItem("userRole", userData.role);
+      localStorage.setItem("userEmail", userData.email);
 
       setSuccess("Login successful!");
       setEmail("");
       setPassword("");
 
       setTimeout(() => {
-        window.location.href = "#dashboard";
+        window.location.href = "/"; 
       }, 1500);
 
     } catch (err) {
+      console.error(err);
+
       if (err.code === "auth/user-not-found") {
         setError("User not found");
+
       } else if (err.code === "auth/wrong-password") {
         setError("Incorrect password");
+
+      } else if (err.code === "auth/invalid-credential") {
+        setError("Invalid email or password");
+
       } else {
         setError(err.message);
       }
@@ -52,6 +81,7 @@ function LoginForm({ onSwitchToRegister }) {
 
   return (
     <div className="form-card">
+
       <div className="card-logo">
         <img src={logo} alt="Artify" className="logo-img" />
       </div>
@@ -98,6 +128,7 @@ function LoginForm({ onSwitchToRegister }) {
           Register here
         </a>
       </div>
+
     </div>
   );
 }

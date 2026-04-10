@@ -1,15 +1,11 @@
-// src/Categories.js
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Categories.css";
-import "./Navbar.jsx";
-import "./navbar.css";
 import Footer from "./Footer.jsx";
 
 function Categories() {
-  // State for selected subcategory
+  const navigate = useNavigate();
   const [selectedSubcategory, setSelectedSubcategory] = useState("All");
-
-  // State for collapsed categories
   const [collapsedCategories, setCollapsedCategories] = useState({
     Painting: false,
     Sculpture: false,
@@ -19,10 +15,6 @@ function Categories() {
     Ceramic: false,
   });
 
-  // State for selected main category
-  const [selectedCategory, setSelectedCategory] = useState("");
-
-  // Categories data with subcategories
   const categoriesData = [
     {
       name: "Painting",
@@ -68,7 +60,6 @@ function Categories() {
     },
   ];
 
-  // Toggle category collapse
   const toggleCategory = (categoryName) => {
     setCollapsedCategories((prev) => ({
       ...prev,
@@ -76,15 +67,15 @@ function Categories() {
     }));
   };
 
-  // Handle subcategory click
   const handleSubcategoryClick = (category, subcategory) => {
-    setSelectedCategory(category);
     setSelectedSubcategory(subcategory);
-    // Scroll to top
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // All featured items data
+  const handleViewArtwork = (artworkId) => {
+    navigate(`/artwork/${artworkId}`);
+  };
+
   const allFeaturedItems = [
     {
       id: 1,
@@ -96,8 +87,7 @@ function Categories() {
       price: 999,
       category: "Painting",
       subcategory: "Watercolor",
-      image:
-        "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=400&h=300&fit=crop",
+      image: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=400&h=300&fit=crop",
     },
     {
       id: 2,
@@ -121,8 +111,7 @@ function Categories() {
       price: 1500,
       category: "Painting",
       subcategory: "Acrylic",
-      image:
-        "https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=400&h=300&fit=crop",
+      image: "https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=400&h=300&fit=crop",
     },
     {
       id: 4,
@@ -146,8 +135,7 @@ function Categories() {
       price: 800,
       category: "Portrait",
       subcategory: "Charcoal",
-      image:
-        "https://images.unsplash.com/photo-1518684079-3c830dcef090?w=400&h=300&fit=crop",
+      image: "https://images.unsplash.com/photo-1518684079-3c830dcef090?w=400&h=300&fit=crop",
     },
     {
       id: 6,
@@ -171,8 +159,7 @@ function Categories() {
       price: 450,
       category: "Ceramic",
       subcategory: "Pottery",
-      image:
-        "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=400&h=300&fit=crop",
+      image: "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=400&h=300&fit=crop",
     },
     {
       id: 8,
@@ -200,13 +187,12 @@ function Categories() {
     },
   ];
 
-  // Filter items based on selected subcategory
   const getFilteredItems = () => {
     if (selectedSubcategory === "All") {
       return allFeaturedItems;
     }
     return allFeaturedItems.filter(
-      (item) => item.subcategory === selectedSubcategory,
+      (item) => item.subcategory === selectedSubcategory
     );
   };
 
@@ -214,26 +200,24 @@ function Categories() {
 
   return (
     <div className="artify-container">
-      {/* Main Layout */}
       <div className="main-layout">
-        {/* Left Side - Categories Sidebar */}
         <div className="sidebar">
           <div className="sidebar-header">
             <span>Categories</span>
             <span className="collapse-icon">⌃</span>
           </div>
 
-          {/* All Categories Option */}
           <div className="category-group">
             <div
-              className={`category-title ${selectedSubcategory === "All" ? "active-category" : ""}`}
+              className={`category-title ${
+                selectedSubcategory === "All" ? "active-category" : ""
+              }`}
               onClick={() => setSelectedSubcategory("All")}
             >
               <span>All Categories</span>
             </div>
           </div>
 
-          {/* Dynamically render categories */}
           {categoriesData.map((category) => (
             <div key={category.name} className="category-group">
               <div
@@ -242,26 +226,23 @@ function Categories() {
               >
                 <span>{category.name}</span>
                 <span
-                  className={`category-arrow ${collapsedCategories[category.name] ? "collapsed" : ""}`}
+                  className={`category-arrow ${
+                    collapsedCategories[category.name] ? "collapsed" : ""
+                  }`}
                 >
                   ⌃
                 </span>
               </div>
 
-              {/* Show subcategories if not collapsed */}
               {!collapsedCategories[category.name] &&
                 category.subcategories.length > 0 && (
                   <ul>
                     {category.subcategories.map((sub) => (
                       <li
                         key={sub}
-                        onClick={() =>
-                          handleSubcategoryClick(category.name, sub)
-                        }
+                        onClick={() => handleSubcategoryClick(category.name, sub)}
                         className={
-                          selectedSubcategory === sub
-                            ? "active-subcategory"
-                            : ""
+                          selectedSubcategory === sub ? "active-subcategory" : ""
                         }
                       >
                         {sub}
@@ -270,7 +251,6 @@ function Categories() {
                   </ul>
                 )}
 
-              {/* If no subcategories, show message */}
               {!collapsedCategories[category.name] &&
                 category.subcategories.length === 0 && (
                   <ul>
@@ -281,30 +261,22 @@ function Categories() {
           ))}
         </div>
 
-        {/* Right Side - Featured Items */}
         <div className="featured-section">
           <h1 className="artify-title">Artify</h1>
 
           <div className="category-header">
             <h2 className="section-title">
-              {selectedSubcategory === "All"
-                ? "All Artworks"
-                : selectedSubcategory}
+              {selectedSubcategory === "All" ? "All Artworks" : selectedSubcategory}
             </h2>
-            <p className="item-count-display">
-              {filteredItems.length} items found
-            </p>
+            <p className="item-count-display">{filteredItems.length} items found</p>
           </div>
 
-          {/* Featured Items Grid */}
           <div className="featured-grid">
             {filteredItems.map((item) => (
               <div key={item.id} className="featured-card">
                 <div className="featured-image">
                   <img src={item.image} alt={item.title} />
-                  <div className="price-tag">
-                    ₱{item.price.toLocaleString()}
-                  </div>
+                  <div className="price-tag">₱{item.price.toLocaleString()}</div>
                 </div>
                 <div className="featured-details">
                   <h3 className="featured-title">{item.title}</h3>
@@ -314,7 +286,12 @@ function Categories() {
                   <p className="artwork-info">
                     {item.medium} / {item.dimensions}
                   </p>
-                  <button className="view-button">View Artwork</button>
+                  <button
+                    className="view-button"
+                    onClick={() => handleViewArtwork(item.id)}
+                  >
+                    View Artwork
+                  </button>
                 </div>
               </div>
             ))}

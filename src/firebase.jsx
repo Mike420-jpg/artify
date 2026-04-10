@@ -4,13 +4,13 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBn-OxfVzZpCCpvIqRuhNbz2bwqDb1VFu4",
-  authDomain: "artify-tip.firebaseapp.com",
-  projectId: "artify-tip",
-  storageBucket: "artify-tip.firebasestorage.app",
-  messagingSenderId: "688132786169",
-  appId: "1:688132786169:web:a4cddebea9b3becf669f28",
-  measurementId: "G-K38B9CQXX9"
+  apiKey: "AIzaSyAiGohldZTbmYUkUtF3n0a8kTJF_NGlxVo",
+  authDomain: "artifytip.firebaseapp.com",
+  projectId: "artifytip",
+  storageBucket: "artifytip.firebasestorage.app",
+  messagingSenderId: "733176841835",
+  appId: "1:733176841835:web:657b7b64550a04bb26132e",
+  measurementId: "G-QSF0XXEEXZ"
 };
 const app = initializeApp(firebaseConfig);
 
