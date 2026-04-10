@@ -23,31 +23,31 @@ const SuperSideNav = () => {
             </div>
 
             <div className="list">
-                <Link to="/Dashboard"> 
+                <Link to="/SuperDashboard"> 
                     <img src={dashboard} className="icons" alt="Dashboard" /> Dashboard 
                 </Link>
             </div>
 
             <div className="list">
-                <Link to="/Approval"> 
+                <Link to="/SuperApproval"> 
                     <img src={approval} className="icons" alt="Approval" /> Approval 
                 </Link>
             </div>
 
             <div className="list">
-                <Link to="/Artworks"> 
+                <Link to="/SuperArtworks"> 
                     <img src={artworks} className="icons" alt="Artworks" /> Artworks 
                 </Link>
             </div>
 
             <div className="list">
-                <Link to="/Transactions"> 
+                <Link to="/SuperTransactions"> 
                     <img src={transactions} className="icons" alt="Transactions" /> Transactions 
                 </Link>
             </div>
 
             <div className="list">
-                <Link to="/Archive"> 
+                <Link to="/SuperArchive"> 
                     <img src={archive} className="icons" alt="Archive" /> Archive 
                 </Link>
             </div>
