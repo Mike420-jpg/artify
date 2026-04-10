@@ -8,7 +8,7 @@ const SuperDashboard = () => {
     return (
         <div className="Dashboard">
             <div className="main">
-                <h1 className="welcome">Welcome, Admin!</h1>
+                <h1 className="welcome">Welcome, Super-Admin!</h1>
 
                     <div className="container">
                         <div className="RegUsers">
