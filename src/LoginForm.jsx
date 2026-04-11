@@ -1,89 +1,124 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./FormCard.css";
 import logo from "./Images/Artify_Logo.png";
 
-import { 
+import {
   signInWithEmailAndPassword,
   setPersistence,
-  browserLocalPersistence
+  browserLocalPersistence,
 } from "firebase/auth";
 
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "./firebase";
 
 function LoginForm({ onSwitchToRegister }) {
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const validateEmail = (email) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const validateEmail = (value) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     setError("");
     setSuccess("");
 
     if (!validateEmail(email)) {
-      return setError("Please enter a valid email");
+      setError("Please enter a valid email address.");
+      return;
     }
 
     if (password.length < 6) {
-      return setError("Password must be at least 6 characters");
+      setError("Password must be at least 6 characters.");
+      return;
     }
 
     try {
+      setLoading(true);
       await setPersistence(auth, browserLocalPersistence);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
 
-      const docSnap = await getDoc(doc(db, "users", user.uid));
-
-      if (!docSnap.exists()) {
-        setError("User data not found");
+      if (!userSnap.exists()) {
+        setError("User data not found.");
+        setLoading(false);
         return;
       }
 
-      const userData = docSnap.data();
+      const userData = userSnap.data();
+      localStorage.setItem("userEmail", userData.email || user.email);
+      localStorage.setItem("userRole", userData.role || "User");
+      localStorage.setItem("userUID", user.uid);
 
-      localStorage.setItem("userRole", userData.role);
-      localStorage.setItem("userEmail", userData.email);
-
-      setSuccess("Login successful!");
-      setEmail("");
-      setPassword("");
-
+      setSuccess("Login successful! Redirecting... 🎉");
       setTimeout(() => {
-        window.location.href = "/"; 
-      }, 1500);
+        switch (userData.role) {
+          case "Super admin":
+            navigate("/super-dashboard");
+            break;
 
+          case "Admin":
+            navigate("/admin-dashboard");
+            break;
+
+          default:
+            navigate("/");
+            break;
+        }
+      }, 1000);
     } catch (err) {
-      console.error(err);
+      console.error("Login Error:", err);
 
-      if (err.code === "auth/user-not-found") {
-        setError("User not found");
+      switch (err.code) {
+        case "auth/user-not-found":
+          setError("No account found with that email.");
+          break;
 
-      } else if (err.code === "auth/wrong-password") {
-        setError("Incorrect password");
+        case "auth/wrong-password":
+          setError("Incorrect password.");
+          break;
 
-      } else if (err.code === "auth/invalid-credential") {
-        setError("Invalid email or password");
+        case "auth/invalid-email":
+          setError("Invalid email format.");
+          break;
 
-      } else {
-        setError(err.message);
+        case "auth/invalid-credential":
+          setError("Invalid email or password.");
+          break;
+
+        case "auth/too-many-requests":
+          setError("Too many login attempts. Please try again later.");
+          break;
+
+        default:
+          setError("Something went wrong. Please try again.");
+          break;
       }
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="form-card">
-
       <div className="card-logo">
-        <img src={logo} alt="Artify" className="logo-img" />
+        <img src={logo} alt="Artify Logo" className="logo-img" />
       </div>
 
       <h1 className="form-title">SIGN IN</h1>
@@ -99,6 +134,7 @@ function LoginForm({ onSwitchToRegister }) {
           className="form-input"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          autoComplete="email"
           required
         />
 
@@ -108,16 +144,21 @@ function LoginForm({ onSwitchToRegister }) {
           className="form-input"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          autoComplete="current-password"
           required
         />
 
-        <button type="submit" className="register-btn">
-          Sign In
+        <button
+          type="submit"
+          className="register-btn"
+          disabled={loading}
+        >
+          {loading ? "Signing In..." : "Sign In"}
         </button>
       </form>
 
       <div className="login-link">
-        Don't have an account?{" "}
+        Don&apos;t have an account?{" "}
         <a
           href="#"
           onClick={(e) => {
@@ -128,7 +169,6 @@ function LoginForm({ onSwitchToRegister }) {
           Register here
         </a>
       </div>
-
     </div>
   );
 }
