@@ -20,7 +20,8 @@ import LoginForm from './LoginForm';
 
 import SuperAdminLayout from "./super-admin/src/App";
 import AdminLayout from "./ui-admin/src/App";
-import StaffLayout from "./StaffDashboard/src/App";
+import StaffLayout from "./StaffDashboard";
+<Route path="/artwork/:id" element={<ArtworkDetail />} />
 
 function Home() {
   return (

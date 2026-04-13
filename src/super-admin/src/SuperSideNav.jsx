@@ -6,7 +6,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import logo from './Images/Artify_Logo.png';
 import UserIcon from './Images/user.png';
-import dashboard from './Images/dashboard.png';
+import dashboard from './Images/Dashboard.png';
 import approval from './Images/approval.png';
 import artworks from './Images/artworks.png';
 import transactions from './Images/transactions.png';

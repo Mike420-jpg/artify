@@ -1,89 +1,65 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { getArtworkById } from "./artworksData";
-import "./ArtworkDetail.css";
-import Footer from "./Footer";
+import React from "react";
+import Image1 from './Images/DISCOVER.png';
+import Image2 from './Images/PURCHASE.png';
+import Image3 from './Images/DELIVER.png';
+import line from './Decorative Vector Lines/Line7.png';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import './ArtifyWorks.css';
 
-function ArtworkDetail() {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const [artwork, setArtwork] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const foundArtwork = getArtworkById(id);
-
-    if (foundArtwork) {
-      setArtwork(foundArtwork);
-      setLoading(false);
-    } else {
-      navigate("/categories");
-    }
-  }, [id, navigate]);
-
-  const handleAddToCartClick = () => {
-    alert("Cart functionality coming soon! This is a preview.");
-  };
-
-  if (loading) {
+const ArtifyWorks = () => {
     return (
-      <div className="artwork-loading">
-        <div className="loading-spinner"></div>
-        <p>Loading artwork...</p>
-      </div>
-    );
-  }
+        <div className="artifyWorksContainer">
+  <div className="container1 text-center">
+    <h1 className="WebTitle">HOW ARTIFY WORKS</h1>
+    <p id="ShortDesc">FIND THE PERFECT ARTWORK FOR YOUR SPACE IN JUST THREE EASY STEPS</p>
 
-  return (
-    <div className="artwork-detail-page">
-      <div className="artwork-detail-content">
-        <div className="artwork-image-section">
-          <img src={artwork.image} alt={artwork.title} />
-        </div>
+    <img
+      src={line}
+      className="DecorativeLine1"
+      alt="DecorativeLine"
+    />
 
-        <div className="artwork-info-section">
-          <h1 className="artwork-category-title">{artwork.category}</h1>
-
-          <h2 className="artwork-subtitle">{artwork.title}</h2>
-
-          <div className="artwork-meta">
-            <span className="artwork-code">{artwork.code}</span>
-            <span className="artwork-price-display">
-              ₱{artwork.price.toLocaleString()}
-            </span>
-          </div>
-
-          <p className="artwork-description">{artwork.description}</p>
-
-          <button className="add-to-cart-button" onClick={handleAddToCartClick}>
-            Add to Cart — ₱{artwork.price.toLocaleString()}
-          </button>
-
-          <div className="contact-info">
-            <h3>CONTACT INFORMATION</h3>
-            <p>
-              <strong>Tel:</strong> +44 (0)20 1234 5678
-            </p>
-            <p>
-              <strong>Email:</strong> info@example.com
-            </p>
-            <p>
-              <strong>Website:</strong> www.example.com
-            </p>
-          </div>
-
-          <button
-            className="back-button"
-            onClick={() => navigate("/categories")}
-          >
-            ← Back to Gallery
-          </button>
-        </div>
+    <div className="row align-items-start">
+      <div className="col">
+        <img
+          src={Image1}
+          alt="Discover"
+          className="ArtifyWorks"
+        />
+        <p className="Subtitle">DISCOVER ORIGINAL ART</p>
+        <p className="captions">
+          Browse and choose from a curated collection of unique art pieces.
+        </p>
       </div>
 
-      <Footer />
+      <div className="col">
+        <img
+          src={Image2}
+          alt="Purchase"
+          className="ArtifyWorks"
+        />
+        <p className="Subtitle">PURCHASE SECURELY</p>
+        <p className="captions">
+          Buy your favorite art with our secure and easy payment process
+        </p>
+      </div>
+
+      <div className="col">
+        <img
+          src={Image3}
+          alt="Deliver"
+          className="ArtifyWorks"
+        />
+        <p className="Subtitle">DELIVERED TO YOUR DOOR</p>
+        <p className="captions">
+          Get your art delivered safely and ready to hang inside your home
+        </p>
+      </div>
     </div>
-  );
-}
+  </div>
+</div>
+    );
+};
 
-export default ArtworkDetail;
+export default ArtifyWorks;
