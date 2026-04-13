@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./FormCard.css";
 import logo from "./Images/Artify_Logo.png";
+import AdminLayout from "./ui-admin/src/App.jsx";
 
 import {
   signInWithEmailAndPassword,
@@ -24,7 +25,7 @@ function LoginForm({ onSwitchToRegister }) {
 
   const validateEmail = (value) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-  };
+  }; 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -68,16 +69,22 @@ function LoginForm({ onSwitchToRegister }) {
 
       setSuccess("Login successful! Redirecting... 🎉");
       setTimeout(() => {
-  const role = userData.role;
+  switch (userData.role) {
+    case "Super Admin":
+      navigate("/super-dashboard");
+      break;
 
-  if (role === "Super Admin") {
-    navigate("/SuperAdmin");
-  } else if (role === "Admin") {
-    navigate("/admin-dashboard");
-  } else if (role === "Staff") {
-    navigate("/staff-dashboard");
-  } else {
-    navigate("/");
+    case "Admin":
+      navigate("/admin-dashboard");
+      break;
+
+    case "Staff":
+      navigate("/staff-dashboard");
+      break;
+
+    default:
+      navigate("/");
+      break;
   }
 }, 1000);
     } catch (err) {

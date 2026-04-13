@@ -6,7 +6,7 @@ import './Archive.css';
 const Archive = () => {
     return (
         <div className="Archive">
-            <div className="main">
+            <div className="archive-main">
                 <h1 className="welcome"> Archived Artworks </h1>
 
                     <div className="columns">

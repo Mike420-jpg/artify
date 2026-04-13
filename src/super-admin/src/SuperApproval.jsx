@@ -6,10 +6,10 @@ import './Approval.css';
 const Approval = () => {
     return (
         <div className="Approval">
-            <div className="main">
+            <div className="approval-main">
                 <h1 className="welcome">Pending Artworks for Approval </h1>
 
-                    <div className="columns">
+                    <div className="approval-columns">
                         <p> Artwork </p>
                         <p>Artist</p>
                         <p>Name</p>

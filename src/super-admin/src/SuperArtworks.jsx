@@ -6,10 +6,10 @@ import './Artworks.css';
 const Artworks = () => {
     return (
         <div className="Artworks">
-            <div className="main">
+            <div className="artworks-main">
                 <h1 className="welcome">Approved Artworks </h1>
 
-                    <div className="columns">
+                    <div className="artworks-columns">
                         <p> Artwork </p>
                         <p>Artist</p>
                         <p>Name</p>

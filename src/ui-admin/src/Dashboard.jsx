@@ -6,7 +6,7 @@ import './Dashboard.css';
 const Dashboard = () => {
     return (
         <div className="Dashboard">
-            <div className="main">
+            <div className="dashboard-main">
                 <h1 className="welcome">Welcome, Admin!</h1>
 
                     <div className="container">

@@ -16,11 +16,10 @@
 }
 
 /* Style page content */
-.Transactions .main {
-  margin-left: 77px; /* Same as the width of the sidebar */
+.transactions-main {
+  margin-left: 200px; /* Same as the width of the sidebar */
   background-color: #121212;
-  height: 100vh;
-  width: 104%;
+  min-height: 100vh;
   overflow-y: scroll;
 }
 
@@ -40,7 +39,8 @@
 .Transactions .columns {
   display: grid;
   grid-template-columns: repeat(9, 1fr);
-  align-items: center;
+  text-align: center;
+  margin-right: 20px;
   padding: 0 20px;
 }
 
@@ -49,8 +49,6 @@
   font-size: 18px;
   font-family: "Instrument Sans", sans-serif;
   margin: 0;
-  margin-left: 1px;
-  margin-right: 1px;
   font-weight: 300;
 }
 

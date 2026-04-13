@@ -7,7 +7,7 @@ import './Dashboard.css';
 const SuperDashboard = () => {
     return (
         <div className="Dashboard">
-            <div className="main">
+            <div className="dashboard-main">
                 <h1 className="welcome">Welcome, Super-Admin!</h1>
 
                     <div className="container">

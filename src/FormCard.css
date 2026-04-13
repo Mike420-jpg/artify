@@ -303,6 +303,7 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
 }
 
 .main-container {
@@ -316,6 +317,7 @@
             background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
                 url('./Images/background.png') center/cover no-repeat fixed;
     height: 100vh;
+    overflow-y: scroll;
 }
 
 /* Left Section - Background */

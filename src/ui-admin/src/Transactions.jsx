@@ -6,7 +6,7 @@ import './Transactions.css';
 const Transactions = () => {
     return (
         <div className="Transactions">
-            <div className="main">
+            <div className="transactions-main">
                 <h1 className="welcome"> Recent Transactions </h1>
 
                     <div className="columns">

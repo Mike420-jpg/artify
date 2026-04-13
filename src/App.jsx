@@ -103,65 +103,55 @@ function App() {
 
   return (
     <Router>
-      <Navbar />
+  <Routes>
+    {/* PUBLIC PAGES WITH NAVBAR */}
+    <Route
+      path="/*"
+      element={
+        <>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/categories" element={<Categories />} />
+            <Route path="/aboutus" element={<AboutUs />} />
+            <Route path="/LoginRegister" element={<Login />} />
+            <Route path="/artwork/:id" element={<ArtworkDetail />} />
+          </Routes>
+        </>
+      }
+    />
 
-      <Routes>
-        {/* PUBLIC */}
-        <Route path="/" element={<Home />} />
-        <Route path="/categories" element={<Categories />} />
-        <Route path="/aboutus" element={<AboutUs />} />
-        <Route path="/LoginRegister" element={<Login />} />
-        <Route path="/artwork/:id" element={<ArtworkDetail />} />
+    {/* ADMIN (NO TOP NAVBAR) */}
+    <Route
+      path="/admin-dashboard/*"
+      element={
+        <AdminRoute>
+          <AdminLayout />
+        </AdminRoute>
+      }
+    />
 
-        {/* DASHBOARDS */}
-        <Route
-          path="/SuperAdmin/*"
-          element={
-            <SuperAdminRoute>
-              <SuperAdminLayout />
-            </SuperAdminRoute>
-          }
-        />
+    {/* SUPER ADMIN */}
+    <Route
+      path="/super-dashboard/*"
+      element={
+        <SuperAdminRoute>
+          <SuperAdminLayout />
+        </SuperAdminRoute>
+      }
+    />
 
-        <Route
-          path="/admin-dashboard/*"
-          element={
-            <AdminRoute>
-              <AdminLayout />
-            </AdminRoute>
-          }
-        />
-
-        <Route
-          path="/staff-dashboard/*"
-          element={
-            <StaffRoute>
-              <StaffLayout />
-            </StaffRoute>
-          }
-        />
-
-        {/* ROLE REDIRECT */}
-        <Route
-          path="/redirect"
-          element={
-            user ? (
-              role === "Super Admin" ? (
-                <Navigate to="/SuperAdmin" />
-              ) : role === "Admin" ? (
-                <Navigate to="/admin-dashboard" />
-              ) : role === "Staff" ? (
-                <Navigate to="/staff-dashboard" />
-              ) : (
-                <Navigate to="/" />
-              )
-            ) : (
-              <Navigate to="/LoginRegister" />
-            )
-          }
-        />
-      </Routes>
-    </Router>
+    {/* STAFF */}
+    <Route
+      path="/staff-dashboard/*"
+      element={
+        <StaffRoute>
+          <StaffLayout />
+        </StaffRoute>
+      }
+    />
+  </Routes>
+</Router>
   );
 }
 

@@ -14,15 +14,13 @@ function AdminLayout() {
   return (
     <>
       <SideNav />
-
       <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="Dashboard" element={<Dashboard />} />
+        <Route index element={<Dashboard />} />
         <Route path="Approval" element={<Approval />} />
         <Route path="Artworks" element={<Artworks />} />
         <Route path="Transactions" element={<Transactions />} />
         <Route path="Archive" element={<Archive />} />
-      </Routes>
+    </Routes>
     </>
   );
 }

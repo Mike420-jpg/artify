@@ -16,11 +16,10 @@
 }
 
 /* Style page content */
-.Artworks .main {
-  margin-left: 77px; /* Same as the width of the sidebar */
+.artworks-main {
+  margin-left: 200px; /* Same as the width of the sidebar */
   background-color: #121212;
-  height: 100vh;
-  width: 104%;
+  min-height: 100vh;
   overflow-y: scroll;
 }
 
@@ -37,20 +36,18 @@
     margin-left: 15px;
 }
 
-.Artworks .columns {
+.artworks-columns {
   display: grid;
   grid-template-columns: repeat(7, 1fr); /* 5 equal columns */
-  align-items: center;
+  text-align: center;
   padding: 0 20px;
 }
 
-.Artworks .columns p {
+.artworks-columns p {
   color: white;
   font-size: 18px;
   font-family: "Instrument Sans", sans-serif;
   margin: 0;
-  margin-left: 5px;
-  margin-right: 5px;
   font-weight: 300;
 }
 

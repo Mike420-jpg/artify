@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Routes, Route } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
 import { auth, db } from "./firebase";
+import "./Staff.css";
 
 /* ================= HEADER ================= */
 function Header() {

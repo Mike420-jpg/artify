@@ -22,31 +22,31 @@ const SideNav = () => {
             </div>
 
             <div className="list">
-                <Link to="/Dashboard"> 
+                <Link to="/admin-dashboard">
                     <img src={dashboard} className="icons" alt="Dashboard" /> Dashboard 
                 </Link>
             </div>
 
             <div className="list">
-                <Link to="/Approval"> 
+                <Link to="/admin-dashboard/Approval"> 
                     <img src={approval} className="icons" alt="Approval" /> Approval 
                 </Link>
             </div>
 
             <div className="list">
-                <Link to="/Artworks"> 
+                <Link to="/admin-dashboard/Artworks">
                     <img src={artworks} className="icons" alt="Artworks" /> Artworks 
                 </Link>
             </div>
 
             <div className="list">
-                <Link to="/Transactions"> 
+                <Link to="/admin-dashboard/Transactions">
                     <img src={transactions} className="icons" alt="Transactions" /> Transactions 
                 </Link>
             </div>
 
             <div className="list">
-                <Link to="/Archive"> 
+                <Link to="/admin-dashboard/Archive">
                     <img src={archive} className="icons" alt="Archive" /> Archive 
                 </Link>
             </div>

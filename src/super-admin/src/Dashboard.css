@@ -16,11 +16,10 @@
 }
 
 /* Style page content */
-.Dashboard .main {
-  margin-left: 77px; /* Same as the width of the sidebar */
+.dashboard-main {
+  margin-left: 200px; /* Same as the width of the sidebar */
   background-color: #121212;
-  height: 100vh;
-  width: 104%;
+  min-height: 100vh;
   overflow-y: scroll;
 }
 
