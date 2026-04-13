@@ -68,20 +68,18 @@ function LoginForm({ onSwitchToRegister }) {
 
       setSuccess("Login successful! Redirecting... 🎉");
       setTimeout(() => {
-        switch (userData.role) {
-          case "Super admin":
-            navigate("/super-dashboard");
-            break;
+  const role = userData.role;
 
-          case "Admin":
-            navigate("/admin-dashboard");
-            break;
-
-          default:
-            navigate("/");
-            break;
-        }
-      }, 1000);
+  if (role === "Super Admin") {
+    navigate("/SuperAdmin");
+  } else if (role === "Admin") {
+    navigate("/admin-dashboard");
+  } else if (role === "Staff") {
+    navigate("/staff-dashboard");
+  } else {
+    navigate("/");
+  }
+}, 1000);
     } catch (err) {
       console.error("Login Error:", err);
 

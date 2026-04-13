@@ -1,0 +1,79 @@
+.gloock-regular {
+    font-family: "Gloock", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.jacques-francois-regular {
+    font-family: "Jacques Francois", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.instrument-sans {
+    font-family: "Instrument Sans", sans-serif;
+    font-style: normal;
+}
+
+/* The sidebar menu */
+.supersidenav {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 200px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #181818; /* Black */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  overflow-y: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+}
+
+#Logo {
+    height: 50px;
+    margin: 15px 15px 15px 15px;
+}
+
+.Placement {
+    text-align: center;
+}
+
+/* The navigation menu links */
+.supersidenav a {
+  padding: 6px 8px 20px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #FFFF;
+  display: block;
+  text-align: start;
+}
+
+/* When you mouse over the navigation links, change their color */
+.supersidenav a:hover {
+  color: #A9A9A9;
+}
+
+.list {
+    margin-left: 10px;
+}
+
+.logout {
+    margin-left: 12px;
+    margin-top: 60px;
+}
+
+.icons {
+    height: 25px;
+    margin-top: -4px;
+    padding-right: 10px;
+}
+
+.icons :hover {
+  color: #A9A9A9;
+}
+
+#UserIcon {
+    height: 50px;
+    width: 50px;
+    margin-bottom: 15px;
+}

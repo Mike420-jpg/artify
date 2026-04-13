@@ -1,10 +1,12 @@
 import React from 'react';
-import Header from './components/Header';
+import { Routes, Route } from "react-router-dom";
+
+import Header from './components/Header.jsx';
 import WelcomeSalesRow from './components/WelcomeSalesRow';
 import ArtistsSection from './components/ArtistsSection';
 import RecentSales from './components/RecentSales';
 
-function App() {
+function StaffHome() {
   return (
     <div className="container">
       <Header />
@@ -15,4 +17,12 @@ function App() {
   );
 }
 
-export default App;
+function StaffLayout() {
+  return (
+    <Routes>
+      <Route path="/" element={<StaffHome />} />
+    </Routes>
+  );
+}
+
+export default StaffLayout;

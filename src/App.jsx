@@ -17,8 +17,10 @@ import Footer from "./Footer";
 import AboutUs from "./AboutUs";
 import RegisterForm from './RegisterForm';
 import LoginForm from './LoginForm';
-import SuperDashboard from "./super-admin/src/SuperDashboard";
-import AdminDashboard from "./ui-admin/src/Dashboard";
+
+import SuperAdminLayout from "./super-admin/src/App";
+import AdminLayout from "./ui-admin/src/App";
+import StaffLayout from "./StaffDashboard/src/App";
 
 function Home() {
   return (
@@ -53,14 +55,7 @@ function Login() {
     </div>
   );
 }
-function Dashboard({ user }) {
-  return (
-    <div style={{ padding: "40px" }}>
-      <h2>Welcome</h2>
-      <p>You are logged in as: {user.email}</p>
-    </div>
-  );
-}
+
 function AdminRoute({ children }) {
   const role = localStorage.getItem("userRole");
   return role === "Admin" ? children : <Navigate to="/" />;
@@ -68,11 +63,12 @@ function AdminRoute({ children }) {
 
 function SuperAdminRoute({ children }) {
   const role = localStorage.getItem("userRole");
-  return role === "Super admin" ? children : <Navigate to="/" />;
+  return role === "Super Admin" ? children : <Navigate to="/" />;
 }
 
-function UserRoute({ user, children }) {
-  return user ? children : <Navigate to="/LoginRegister" />;
+function StaffRoute({ children }) {
+  const role = localStorage.getItem("userRole");
+  return role === "Staff" ? children : <Navigate to="/" />;
 }
 
 function App() {
@@ -85,16 +81,11 @@ function App() {
       setUser(currentUser);
 
       if (currentUser) {
-        try {
-          const docSnap = await getDoc(doc(db, "users", currentUser.uid));
-
-          if (docSnap.exists()) {
-            const userData = docSnap.data();
-            setRole(userData.role);
-            localStorage.setItem("userRole", userData.role);
-          }
-        } catch (error) {
-          console.error("Error fetching role:", error);
+        const docSnap = await getDoc(doc(db, "users", currentUser.uid));
+        if (docSnap.exists()) {
+          const userData = docSnap.data();
+          setRole(userData.role);
+          localStorage.setItem("userRole", userData.role);
         }
       } else {
         setRole(null);
@@ -107,54 +98,61 @@ function App() {
     return () => unsubscribe();
   }, []);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  if (loading) return <p>Loading...</p>;
 
   return (
     <Router>
       <Navbar />
 
       <Routes>
+        {/* PUBLIC */}
         <Route path="/" element={<Home />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/LoginRegister" element={<Login />} />
         <Route path="/artwork/:id" element={<ArtworkDetail />} />
+
+        {/* DASHBOARDS */}
         <Route
-          path="/dashboard"
-          element={
-            <UserRoute user={user}>
-              <Dashboard user={user} />
-            </UserRoute>
-          }
-        />
-        <Route
-          path="/admin-dashboard"
-          element={
-            <AdminRoute>
-              <AdminDashboard />
-            </AdminRoute>
-          }
-        />
-        <Route
-          path="/super-dashboard"
+          path="/SuperAdmin/*"
           element={
             <SuperAdminRoute>
-              <SuperDashboard />
+              <SuperAdminLayout />
             </SuperAdminRoute>
           }
         />
+
+        <Route
+          path="/admin-dashboard/*"
+          element={
+            <AdminRoute>
+              <AdminLayout />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/staff-dashboard/*"
+          element={
+            <StaffRoute>
+              <StaffLayout />
+            </StaffRoute>
+          }
+        />
+
+        {/* ROLE REDIRECT */}
         <Route
           path="/redirect"
           element={
             user ? (
-              role === "Super admin" ? (
-                <Navigate to="/super-dashboard" />
+              role === "Super Admin" ? (
+                <Navigate to="/SuperAdmin" />
               ) : role === "Admin" ? (
                 <Navigate to="/admin-dashboard" />
+              ) : role === "Staff" ? (
+                <Navigate to="/staff-dashboard" />
               ) : (
-                <Navigate to="/dashboard" />
+                <Navigate to="/" />
               )
             ) : (
               <Navigate to="/LoginRegister" />
