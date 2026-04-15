@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Routes, Route } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
 import { auth, db } from "./firebase";
-import "./Staff.css";
-
-/* ================= HEADER ================= */
+import "./Staff.css"
 function Header() {
   return (
     <header className="header">
@@ -14,7 +12,6 @@ function Header() {
   );
 }
 
-/* ================= WELCOME + STATS ================= */
 function WelcomeSalesRow({ stats }) {
   return (
     <div className="welcome-sales-row">
@@ -43,7 +40,6 @@ function WelcomeSalesRow({ stats }) {
   );
 }
 
-/* ================= ARTISTS SECTION ================= */
 function ArtistsSection({ artists }) {
   return (
     <section className="artists-section">
@@ -86,8 +82,6 @@ function ArtistsSection({ artists }) {
     </section>
   );
 }
-
-/* ================= RECENT SALES ================= */
 function RecentSales({ artworks }) {
   return (
     <section className="recent-sales">
@@ -121,7 +115,6 @@ function RecentSales({ artworks }) {
   );
 }
 
-/* ================= MAIN STAFF HOME ================= */
 function StaffHome() {
   const [artists, setArtists] = useState([]);
   const [artworks, setArtworks] = useState([]);
@@ -151,7 +144,7 @@ function StaffHome() {
               name: name,
               genre: data.category || "Unknown",
               sold: 0,
-              status: "Inactive", // DEFAULT
+              status: "Inactive", 
               image: data.image || "/images/default.png"
             };
           }
@@ -164,7 +157,6 @@ function StaffHome() {
         setArtists(artistArray);
         setArtworks(artworksList);
 
-        /* ===== STATS BASED ON FIRESTORE ===== */
         setStats([
           { value: artworksList.length, label: "Total Artworks" },
           { value: artistArray.length, label: "Artists" },
@@ -190,7 +182,6 @@ function StaffHome() {
   );
 }
 
-/* ================= ROUTER ================= */
 function StaffLayout() {
   return (
     <Routes>

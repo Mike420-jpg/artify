@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./FormCard.css";
 import logo from "./Images/Artify_Logo.png";
-import AdminLayout from "./ui-admin/src/App.jsx";
 
 import {
   signInWithEmailAndPassword,

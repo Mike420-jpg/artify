@@ -18,14 +18,14 @@ import AboutUs from "./AboutUs";
 import RegisterForm from './RegisterForm';
 import LoginForm from './LoginForm';
 
-import SuperAdminLayout from "./super-admin/src/App";
-import AdminLayout from "./ui-admin/src/App";
-import StaffLayout from "./StaffDashboard";
-<Route path="/artwork/:id" element={<ArtworkDetail />} />
+import UiAdmin from "./ui-admin.jsx";
+import SuperAdminLayout from "./SuperDashboard.jsx";
+import StaffLayout from "./StaffDashboard.jsx";
 
 function Home() {
   return (
     <>
+      <Navbar />
       <Carousel />
       <Options />
       <CardSlider1 />
@@ -73,23 +73,17 @@ function StaffRoute({ children }) {
 }
 
 function App() {
-  const [user, setUser] = useState(null);
-  const [role, setRole] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      setUser(currentUser);
-
       if (currentUser) {
         const docSnap = await getDoc(doc(db, "users", currentUser.uid));
         if (docSnap.exists()) {
           const userData = docSnap.data();
-          setRole(userData.role);
           localStorage.setItem("userRole", userData.role);
         }
       } else {
-        setRole(null);
         localStorage.removeItem("userRole");
       }
 
@@ -103,55 +97,40 @@ function App() {
 
   return (
     <Router>
-  <Routes>
-    {/* PUBLIC PAGES WITH NAVBAR */}
-    <Route
-      path="/*"
-      element={
-        <>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/categories" element={<Categories />} />
-            <Route path="/aboutus" element={<AboutUs />} />
-            <Route path="/LoginRegister" element={<Login />} />
-            <Route path="/artwork/:id" element={<ArtworkDetail />} />
-          </Routes>
-        </>
-      }
-    />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/categories" element={<><Navbar /><Categories /></>} />
+        <Route path="/aboutus" element={<><Navbar /><AboutUs /></>} />
+        <Route path="/LoginRegister" element={<Login />} />
+        <Route path="/artwork/:id" element={<><Navbar /><ArtworkDetail /></>} />
 
-    {/* ADMIN (NO TOP NAVBAR) */}
-    <Route
-      path="/admin-dashboard/*"
-      element={
-        <AdminRoute>
-          <AdminLayout />
-        </AdminRoute>
-      }
-    />
+        <Route
+          path="/admin-dashboard/*"
+          element={
+            <AdminRoute>
+              <UiAdmin /> 
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/super-dashboard/*"
+          element={
+            <SuperAdminRoute>
+              <SuperAdminLayout />
+            </SuperAdminRoute>
+          }
+        />
+        <Route
+          path="/staff-dashboard/*"
+          element={
+            <StaffRoute>
+              <StaffLayout />
+            </StaffRoute>
+          }
+        />
 
-    {/* SUPER ADMIN */}
-    <Route
-      path="/super-dashboard/*"
-      element={
-        <SuperAdminRoute>
-          <SuperAdminLayout />
-        </SuperAdminRoute>
-      }
-    />
-
-    {/* STAFF */}
-    <Route
-      path="/staff-dashboard/*"
-      element={
-        <StaffRoute>
-          <StaffLayout />
-        </StaffRoute>
-      }
-    />
-  </Routes>
-</Router>
+      </Routes>
+    </Router>
   );
 }
 
