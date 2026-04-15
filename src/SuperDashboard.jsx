@@ -8,6 +8,17 @@ import "./Approval.css"
 import "./Archive.css"
 import "./Transactions.css"
 import "./Account.css"
+import "./SuperSideNav.css";
+
+import logo from './Images/Artify_Logo.png';
+import UserIcon from './Images/user.png';
+import dashboard from './Images/dashboard.png';
+import approval from './Images/approval.png';
+import artworks from './Images/artworks.png';
+import transactions from './Images/transactions.png';
+import archive from './Images/archive.png';
+import account from './Images/account.png';
+import logout from './Images/logout.png';
 
 import { signOut } from "firebase/auth";
 import { auth } from "./firebase";
@@ -23,17 +34,26 @@ function SuperSideNav() {
 
   return (
     <div className="supersidenav">
-      <h2>Super Admin</h2>
-
-      <Link to="/super-dashboard">Dashboard</Link>
-      <Link to="/super-dashboard/approval">Approval</Link>
-      <Link to="/super-dashboard/artworks">Artworks</Link>
-      <Link to="/super-dashboard/transactions">Transactions</Link>
-      <Link to="/super-dashboard/archive">Archive</Link>
-      <Link to="/super-dashboard/account">Account</Link>
+                <div className="Placement">
+                    <img src={logo} alt="Artify Logo" id="Logo" /> <br/>
+                    <img src={UserIcon} alt="User Icon" id="UserIcon" />
+                </div>
+      <div className="list">
+        <Link to="/super-dashboard"><img src={dashboard} className="icons" alt="Dashboard" /> Dashboard</Link>
+        <Link to="/super-dashboard/approval"><img src={approval} className="icons" alt="Approval" />Approval</Link>
+        <Link to="/super-dashboard/artworks"><img src={artworks} className="icons" alt="Artworks" />Artworks</Link>
+        <Link to="/super-dashboard/transactions"><img src={transactions} className="icons" alt="Transactions" />Transactions</Link>
+        <Link to="/super-dashboard/archive"><img src={archive} className="icons" alt="Archive" />Archive</Link>
+        <Link to="/super-dashboard/account"><img src={account} className="icons" alt="Account" />Account</Link>
+      </div>
+      
 
       <div onClick={handleLogout} style={{ cursor: "pointer", marginTop: "20px" }}>
-        Logout
+          <div className="logout">
+            <Link to="Login"> 
+              <img src={logout} className="icons" alt="Logout" /> Logout
+            </Link>
+          </div>
       </div>
     </div>
   );
