@@ -1,19 +1,58 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./CardSlider1.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import card1 from './Images/P1.png';
-import card2 from './Images/P2.png';
-import card3 from './Images/P3.png';
+
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "./firebase";
+
 import like from './Images/heart.png';
 import cart from './Images/bag.png';
 import line from './Decorative Vector Lines/Line5.png';
-import { useEffect, useRef } from "react";
 
 const CardSlider2 = () => {
 
-    const sliderRef = useRef(null);
+  const sliderRef = useRef(null);
+  const [artworks, setArtworks] = useState([]);
 
+  /* ✅ FIREBASE DOCUMENT IDS */
+  const featuredIDs = [
+    "portrait_pastel_1",
+    "portrait_pastel_2",
+    "portrait_pencil_1",
+    "portrait_pencil_2",
+    "sculpture_casting_1",
+    "sculpture_stone_2",
+    "sculpture_casting_1",
+    "sculpture_modeling_2"
+  ];
+
+  /* 🔥 FETCH DATA FROM FIRESTORE */
+  useEffect(() => {
+    const fetchArtworks = async () => {
+      try {
+        const results = await Promise.all(
+          featuredIDs.map(async (id) => {
+            const ref = doc(db, "artworks", id);
+            const snap = await getDoc(ref);
+
+            if (snap.exists()) {
+              return { id: snap.id, ...snap.data() };
+            }
+            return null;
+          })
+        );
+
+        setArtworks(results.filter(Boolean));
+      } catch (err) {
+        console.error("Error fetching artworks:", err);
+      }
+    };
+
+    fetchArtworks();
+  }, []);
+
+  /* 🔥 SLIDER LOGIC (UNCHANGED) */
   useEffect(() => {
     const slider = sliderRef.current;
 
@@ -43,7 +82,6 @@ const CardSlider2 = () => {
       nextBtn.disabled = currentBatch === totalBatches - 1;
     }
 
-    // Touch Start
     const touchStart = (e) => {
       startX = e.touches[0].clientX;
       currentX = startX;
@@ -51,10 +89,8 @@ const CardSlider2 = () => {
       cardContainer.style.transition = "none";
     };
 
-    // Touch Move
     const touchMove = (e) => {
       if (!isDragging) return;
-
       currentX = e.touches[0].clientX;
       const diffX = startX - currentX;
 
@@ -63,7 +99,6 @@ const CardSlider2 = () => {
       }px)`;
     };
 
-    // Touch End
     const touchEnd = () => {
       if (!isDragging) return;
 
@@ -71,16 +106,12 @@ const CardSlider2 = () => {
       const diffX = startX - currentX;
       const threshold = 50;
 
-      if (diffX > threshold && currentBatch < totalBatches - 1) {
-        currentBatch++;
-      } else if (diffX < -threshold && currentBatch > 0) {
-        currentBatch--;
-      }
+      if (diffX > threshold && currentBatch < totalBatches - 1) currentBatch++;
+      else if (diffX < -threshold && currentBatch > 0) currentBatch--;
 
       updateSlider();
     };
 
-    // Mouse Move
     const onMouseMove = (e) => {
       if (!isDragging) return;
 
@@ -92,7 +123,6 @@ const CardSlider2 = () => {
       }px)`;
     };
 
-    // Mouse End
     const onMouseEnd = () => {
       if (!isDragging) return;
 
@@ -100,11 +130,8 @@ const CardSlider2 = () => {
       const diffX = startX - currentX;
       const threshold = 50;
 
-      if (diffX > threshold && currentBatch < totalBatches - 1) {
-        currentBatch++;
-      } else if (diffX < -threshold && currentBatch > 0) {
-        currentBatch--;
-      }
+      if (diffX > threshold && currentBatch < totalBatches - 1) currentBatch++;
+      else if (diffX < -threshold && currentBatch > 0) currentBatch--;
 
       updateSlider();
 
@@ -112,7 +139,6 @@ const CardSlider2 = () => {
       document.removeEventListener("mouseup", onMouseEnd);
     };
 
-    // Mouse Start
     const mouseStart = (e) => {
       startX = e.clientX;
       currentX = startX;
@@ -123,7 +149,6 @@ const CardSlider2 = () => {
       document.addEventListener("mouseup", onMouseEnd);
     };
 
-    // Buttons
     const nextClick = () => {
       if (currentBatch < totalBatches - 1) {
         currentBatch++;
@@ -141,7 +166,6 @@ const CardSlider2 = () => {
     sliderWindow.addEventListener("touchstart", touchStart);
     sliderWindow.addEventListener("touchmove", touchMove);
     sliderWindow.addEventListener("touchend", touchEnd);
-
     sliderWindow.addEventListener("mousedown", mouseStart);
 
     nextBtn.addEventListener("click", nextClick);
@@ -153,7 +177,6 @@ const CardSlider2 = () => {
       sliderWindow.removeEventListener("touchstart", touchStart);
       sliderWindow.removeEventListener("touchmove", touchMove);
       sliderWindow.removeEventListener("touchend", touchEnd);
-
       sliderWindow.removeEventListener("mousedown", mouseStart);
 
       nextBtn.removeEventListener("click", nextClick);
@@ -161,122 +184,57 @@ const CardSlider2 = () => {
     };
   }, []);
 
-    return (
-        <div className="NewArrival container-fluid">
-            <img src= {line} alt = "DecorativeLine" className="DecorativeLine"></img>
-            <h1 className="WebTitle"> POPULAR ARTWORKS </h1>
-            <p id="ShortDesc"> Browse our most loved pieces </p>
+  return (
+    <div className="NewArrival container-fluid">
+      <img src={line} alt="DecorativeLine" className="DecorativeLine" />
 
-            <div className="SliderContainer">
-                <div className="CardSlider" ref={sliderRef}>
-                    <button className="prev"> &#10094; </button>
+      <h1 className="WebTitle">POPULAR ARTWORKS</h1>
+      <p id="ShortDesc">Browse our most loved pieces</p>
 
-                    <div className="slider-window">
-                        <div className="cardContainer">
+      <div className="SliderContainer">
+        <div className="CardSlider" ref={sliderRef}>
+          <button className="prev">&#10094;</button>
 
-                            <div className="card" data-batch="1">
-                                <div className="cardImg">
-                                    <img src={card1} className="card-img-top" alt="Art1"></img>
-                                </div>
+          <div className="slider-window">
+            <div className="cardContainer">
 
-                                <div className="card-body">
-                                    <p className="art-price"> P999 </p>
-                                    <h5 className="card-title"> I Want You To Bloom A Flower In Your Fantasy </h5>
-                                    <p className="card-text"> Jooha Sim, South Korea </p>
-                                    <div className="icon-container">
-                                        <img src={like} alt="Like" className="icons"></img>
-                                        <img src={cart} alt="Cart" className="icons"></img>
-                                    </div>
-                                </div>
-                            </div>
+              {artworks.map((art, index) => (
+                <div
+                  className="card"
+                  key={art.id}
+                  data-batch={index < 3 ? "1" : "2"}
+                >
+                  <div className="cardImg">
+                    <img src={art.image} alt={art.title} />
+                  </div>
 
-                            <div className="card" data-batch="1">
-                                <div className="cardImg">
-                                    <img src={card2} className="card-img-top" alt="Art1"></img>
-                                </div>
+                  <div className="card-body">
+                    {/* ✅ AUTO-RESIZING PRICE */}
+                    <p className="art-price">
+                      ₱{art.price?.toLocaleString()}
+                    </p>
 
-                                <div className="card-body">
-                                    <p className="art-price"> P999 </p>
-                                    <h5 className="card-title"> I Want You To Bloom A Flower In Your Fantasy </h5>
-                                    <p className="card-text"> Jooha Sim, South Korea </p>
-                                    <div className="icon-container">
-                                        <img src={like} alt="Like" className="icons"></img>
-                                        <img src={cart} alt="Cart" className="icons"></img>
-                                    </div>
-                                </div>
-                            </div>
+                    <h5 className="card-title">{art.title}</h5>
+                    <p className="card-text">
+                      {art.artist}, {art.country}
+                    </p>
 
-                            <div className="card" data-batch="1">
-                                <div className="cardImg">
-                                    <img src={card3} className="card-img-top" alt="Art1"></img>
-                                </div>
-
-                                <div className="card-body">
-                                    <p className="art-price"> P999 </p>
-                                    <h5 className="card-title"> I Want You To Bloom A Flower In Your Fantasy </h5>
-                                    <p className="card-text"> Jooha Sim, South Korea </p>
-                                    <div className="icon-container">
-                                        <img src={like} alt="Like" className="icons"></img>
-                                        <img src={cart} alt="Cart" className="icons"></img>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="card" data-batch="2">
-                                <div className="cardImg">
-                                    <img src={card1} className="card-img-top" alt="Art1"></img>
-                                </div>
-
-                                <div className="card-body">
-                                    <p className="art-price"> P999 </p>
-                                    <h5 className="card-title"> I Want You To Bloom A Flower In Your Fantasy </h5>
-                                    <p className="card-text"> Jooha Sim, South Korea </p>
-                                    <div className="icon-container">
-                                        <img src={like} alt="Like" className="icons"></img>
-                                        <img src={cart} alt="Cart" className="icons"></img>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="card" data-batch="2">
-                                <div className="cardImg">
-                                    <img src={card2} className="card-img-top" alt="Art1"></img>
-                                </div>
-
-                                <div className="card-body">
-                                    <p className="art-price"> P999 </p>
-                                    <h5 className="card-title"> I Want You To Bloom A Flower In Your Fantasy </h5>
-                                    <p className="card-text"> Jooha Sim, South Korea </p>
-                                    <div className="icon-container">
-                                        <img src={like} alt="Like" className="icons"></img>
-                                        <img src={cart} alt="Cart" className="icons"></img>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="card" data-batch="2">
-                                <div className="cardImg">
-                                    <img src={card3} className="card-img-top" alt="Art1"></img>
-                                </div>
-
-                                <div className="card-body">
-                                    <p className="art-price"> P999 </p>
-                                    <h5 className="card-title"> I Want You To Bloom A Flower In Your Fantasy </h5>
-                                    <p className="card-text"> Jooha Sim, South Korea </p>
-                                    <div className="icon-container">
-                                        <img src={like} alt="Like" className="icons"></img>
-                                        <img src={cart} alt="Cart" className="icons"></img>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </div>
+                    <div className="icon-container">
+                      <img src={like} alt="Like" className="icons" />
+                      <img src={cart} alt="Cart" className="icons" />
                     </div>
-                <button className="next"> &#10095; </button>
+                  </div>
                 </div>
+              ))}
+
             </div>
+          </div>
+
+          <button className="next">&#10095;</button>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default CardSlider2;
